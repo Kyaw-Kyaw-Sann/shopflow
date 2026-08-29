@@ -6,20 +6,28 @@ import {
   View,
 } from "react-native";
 
-import { categories } from "../../data/categories";
-import { CategoryItem } from "./CategoryItem";
+import type { Product } from "../../types/product";
+import { ProductCard } from "./ProductCard";
 
-export function CategoriesSection() {
+type ProductSectionProps = {
+  title: string;
+  products: Product[];
+};
+
+export function ProductSection({
+  title,
+  products,
+}: ProductSectionProps) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>
-          Categories
+          {title}
         </Text>
 
         <Pressable
           onPress={() => {
-            console.log("See all categories");
+            console.log(`See all: ${title}`);
           }}
         >
           <Text style={styles.seeAll}>
@@ -30,10 +38,10 @@ export function CategoriesSection() {
 
       <FlatList
         horizontal
-        data={categories}
+        data={products}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <CategoryItem category={item} />
+          <ProductCard product={item} />
         )}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.listContent}
@@ -47,13 +55,14 @@ export function CategoriesSection() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 28,
+    marginTop: 30,
   },
 
   header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    marginRight: 20,
   },
 
   title: {

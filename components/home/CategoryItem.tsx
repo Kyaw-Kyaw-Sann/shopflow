@@ -1,54 +1,54 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
+import type { Category } from "../../types/category";
+
 type CategoryItemProps = {
-  icon: string;
-  label: string;
+  category: Category;
 };
 
 export function CategoryItem({
-  icon,
-  label,
+  category,
 }: CategoryItemProps) {
   return (
     <Pressable
-      style={styles.categoryItem}
+      style={styles.container}
       onPress={() => {
-        console.log(`${label} pressed`);
+        console.log(`${category.label} pressed`);
       }}
     >
-      <View style={styles.categoryIcon}>
-        <Text style={styles.categoryEmoji}>
-          {icon}
+      <View style={styles.iconContainer}>
+        <Text style={styles.icon}>
+          {category.icon}
         </Text>
       </View>
 
-      <Text style={styles.categoryLabel}>
-        {label}
+      <Text style={styles.label}>
+        {category.label}
       </Text>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  categoryItem: {
+  container: {
     width: 72,
     alignItems: "center",
   },
 
-  categoryIcon: {
-    width: 56,
-    height: 56,
+  iconContainer: {
+    width: 58,
+    height: 58,
     borderRadius: 18,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#ffffff",
   },
 
-  categoryEmoji: {
+  icon: {
     fontSize: 24,
   },
 
-  categoryLabel: {
+  label: {
     marginTop: 8,
     fontSize: 12,
     color: "#374151",
