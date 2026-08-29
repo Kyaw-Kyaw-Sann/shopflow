@@ -6,6 +6,8 @@ import {
   View,
 } from "react-native";
 
+import { router } from "expo-router";
+
 import type { Product } from "../../types/product";
 import { ProductCard } from "./ProductCard";
 
@@ -18,6 +20,10 @@ export function ProductSection({
   title,
   products,
 }: ProductSectionProps) {
+  function handleSeeAll() {
+    router.push("/products/index");
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -25,11 +31,7 @@ export function ProductSection({
           {title}
         </Text>
 
-        <Pressable
-          onPress={() => {
-            console.log(`See all: ${title}`);
-          }}
-        >
+        <Pressable onPress={handleSeeAll}>
           <Text style={styles.seeAll}>
             See All
           </Text>
