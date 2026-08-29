@@ -6,6 +6,8 @@ import {
   View,
 } from "react-native";
 
+import { router } from "expo-router";
+
 import type { Product } from "../../types/product";
 import { formatReviewCount } from "../../utils/formatReviewCount";
 
@@ -16,15 +18,20 @@ type ProductCardProps = {
 export function ProductCard({
   product,
 }: ProductCardProps) {
+  function handleProductPress() {
+    router.push({
+      pathname: "/products/[id]",
+      params: { id: product.id },
+    });
+  }
+
   return (
     <Pressable
       style={({ pressed }) => [
         styles.card,
         pressed && styles.cardPressed,
       ]}
-      onPress={() => {
-        console.log(`Product pressed: ${product.name}`);
-      }}
+      onPress={handleProductPress}
     >
       <View style={styles.imageContainer}>
         <Image
