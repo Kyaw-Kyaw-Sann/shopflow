@@ -1,17 +1,32 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 export function PromoBanner() {
   return (
     <View style={styles.banner}>
       <View style={styles.bannerContent}>
-        <Text style={styles.bannerLabel}>SUMMER SALE</Text>
+        <Text style={styles.bannerLabel}>
+          SUMMER SALE
+        </Text>
 
         <Text style={styles.bannerTitle}>
           Up to 50% Off
         </Text>
 
+        <Text style={styles.bannerDescription}>
+          Discover this season's best deals.
+        </Text>
+
         <Pressable
-          style={styles.shopButton}
+          style={({ pressed }) => [
+            styles.shopButton,
+            pressed && styles.buttonPressed,
+          ]}
           onPress={() => {
             console.log("Shop now pressed");
           }}
@@ -22,9 +37,13 @@ export function PromoBanner() {
         </Pressable>
       </View>
 
-      <View style={styles.bannerImagePlaceholder}>
-        <Text style={styles.imageText}>Image</Text>
-      </View>
+      <Image
+        source={{
+          uri: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=80",
+        }}
+        style={styles.bannerImage}
+        resizeMode="cover"
+      />
     </View>
   );
 }
@@ -32,8 +51,8 @@ export function PromoBanner() {
 const styles = StyleSheet.create({
   banner: {
     marginTop: 20,
-    minHeight: 170,
-    padding: 20,
+    marginRight: 20,
+    minHeight: 180,
     flexDirection: "row",
     borderRadius: 20,
     overflow: "hidden",
@@ -42,25 +61,34 @@ const styles = StyleSheet.create({
 
   bannerContent: {
     flex: 1,
+    zIndex: 1,
     justifyContent: "center",
+    padding: 20,
   },
 
   bannerLabel: {
-    fontSize: 12,
-    fontWeight: "700",
-    color: "#dbeafe",
+    fontSize: 11,
+    fontWeight: "800",
+    color: "#bfdbfe",
   },
 
   bannerTitle: {
-    marginTop: 8,
-    fontSize: 26,
+    marginTop: 6,
+    fontSize: 25,
     fontWeight: "800",
     color: "#ffffff",
   },
 
+  bannerDescription: {
+    marginTop: 6,
+    fontSize: 12,
+    lineHeight: 18,
+    color: "#dbeafe",
+  },
+
   shopButton: {
     alignSelf: "flex-start",
-    marginTop: 16,
+    marginTop: 14,
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 10,
@@ -68,18 +96,17 @@ const styles = StyleSheet.create({
   },
 
   shopButtonText: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: "700",
     color: "#2563eb",
   },
 
-  bannerImagePlaceholder: {
-    width: 110,
-    alignItems: "center",
-    justifyContent: "center",
+  buttonPressed: {
+    opacity: 0.8,
   },
 
-  imageText: {
-    color: "#dbeafe",
+  bannerImage: {
+    width: 125,
+    height: "100%",
   },
 });
