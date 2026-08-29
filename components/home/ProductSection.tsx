@@ -1,10 +1,4 @@
-import {
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 
 import { router } from "expo-router";
 
@@ -16,25 +10,18 @@ type ProductSectionProps = {
   products: Product[];
 };
 
-export function ProductSection({
-  title,
-  products,
-}: ProductSectionProps) {
+export function ProductSection({ title, products }: ProductSectionProps) {
   function handleSeeAll() {
-    router.push("/products/index");
+    router.push("/products");
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>
-          {title}
-        </Text>
+        <Text style={styles.title}>{title}</Text>
 
         <Pressable onPress={handleSeeAll}>
-          <Text style={styles.seeAll}>
-            See All
-          </Text>
+          <Text style={styles.seeAll}>See All</Text>
         </Pressable>
       </View>
 
@@ -42,14 +29,10 @@ export function ProductSection({
         horizontal
         data={products}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <ProductCard product={item} />
-        )}
+        renderItem={({ item }) => <ProductCard product={item} />}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.listContent}
-        ItemSeparatorComponent={() => (
-          <View style={styles.separator} />
-        )}
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
     </View>
   );
