@@ -13,10 +13,16 @@ import { formatReviewCount } from "../../utils/formatReviewCount";
 
 type ProductCardProps = {
   product: Product;
+  variant?: "default" | "grid";
+  isFavorite?: boolean;
+  onFavoritePress?: (product: Product) => void;
 };
 
 export function ProductCard({
   product,
+  variant = "default",
+  isFavorite = false,
+  onFavoritePress,
 }: ProductCardProps) {
   function handleProductPress() {
     router.push({
@@ -29,6 +35,7 @@ export function ProductCard({
     <Pressable
       style={({ pressed }) => [
         styles.card,
+        variant === "grid" && styles.gridCard,
         pressed && styles.cardPressed,
       ]}
       onPress={handleProductPress}
@@ -53,9 +60,17 @@ export function ProductCard({
         <Pressable
           style={({ pressed }) => [
             styles.favoriteButton,
+            isFavorite && styles.favoriteButtonActive,
             pressed && styles.favoritePressed,
           ]}
-          onPress={() => {
+          onPress={(event) => {
+            event.stopPropagation();
+
+            if (onFavoritePress) {
+              onFavoritePress(product);
+              return;
+            }
+
             console.log(`Favorite: ${product.name}`);
           }}
         >
@@ -114,6 +129,10 @@ const styles = StyleSheet.create({
     borderColor: "#eef0f3",
   },
 
+  gridCard: {
+    width: "100%",
+  },
+
   cardPressed: {
     opacity: 0.88,
   },
@@ -160,6 +179,10 @@ const styles = StyleSheet.create({
 
   favoritePressed: {
     opacity: 0.7,
+  },
+
+  favoriteButtonActive: {
+    backgroundColor: "#fee2e2",
   },
 
   favoriteIcon: {
