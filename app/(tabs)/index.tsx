@@ -4,16 +4,16 @@ import {
   View,
 } from "react-native";
 
-import { CategoriesSection } from "../components/home/CategoriesSession";
-import { HomeHeader } from "../components/home/HomeHeader";
-import { ProductSection } from "../components/home/ProductSection";
-import { PromoBanner } from "../components/home/PromoBanner";
-import { SearchBar } from "../components/home/SearchBar";
+import { CategoriesSection } from "../../components/home/CategoriesSession";
+import { HomeHeader } from "../../components/home/HomeHeader";
+import { ProductSection } from "../../components/home/ProductSection";
+import { PromoBanner } from "../../components/home/PromoBanner";
+import { SearchBar } from "../../components/home/SearchBar";
 
 import {
   popularProducts,
   recommendedProducts,
-} from "../data/products";
+} from "../../data/products";
 
 export default function HomeScreen() {
   return (
